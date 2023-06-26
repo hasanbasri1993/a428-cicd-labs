@@ -12,6 +12,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'npm install'
+                sh 'npm run build'
             }
         }
         stage('Test') {
@@ -21,14 +22,14 @@ pipeline {
         }
         stage('Manual Approval') {
             steps {
-                input message: 'Lanjutkan ke tahap Deploy" to continue)'
-            }
+                input message: 'Lanjutkan ke tahap "Deploy" to continue ?'
+            } 
         }
         stage('Deploy') {
             steps {
-                sleep(time: 1, unit: 'MINUTES')
-                // sh './jenkins/scripts/deliver.sh'
-                // sh './jenkins/scripts/kill.sh'
+            sleep(time: 1, unit: 'MINUTES')
+            echo 'Finish with access at https://a428-cicd-labs-production.up.railway.app/'
+
             }
         }
     }
